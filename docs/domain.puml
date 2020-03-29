@@ -1,0 +1,17 @@
+@startuml
+entity "Question" as question {
+  *id: number
+  text: string
+
+}
+
+entity "Option" as option {
+  *id: number
+  text: string
+  value: number
+  ---
+  question_id:number <<FK>>
+}
+
+question }|-- option
+@enduml
