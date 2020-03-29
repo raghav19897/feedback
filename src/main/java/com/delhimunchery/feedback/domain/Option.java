@@ -14,6 +14,7 @@ public class Option {
   @Column(name = "option_id")
   private int optionId;
   private int score;
+  private String name;
   @Column(name = "image_url")
   private String imageURL;
 
@@ -39,5 +40,13 @@ public class Option {
 
   public void setImageURL(String imageURL) {
     this.imageURL = imageURL;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
   }
 }

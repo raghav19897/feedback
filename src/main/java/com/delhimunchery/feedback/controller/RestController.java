@@ -1,5 +1,6 @@
 package com.delhimunchery.feedback.controller;
 
+import com.delhimunchery.feedback.domain.Option;
 import com.delhimunchery.feedback.domain.Response;
 import com.delhimunchery.feedback.repositories.OptionRepo;
 import com.delhimunchery.feedback.repositories.QuestionRepo;
@@ -64,5 +65,10 @@ public class RestController {
   @GetMapping("/GetQuestion")
   public String getQuestion(@RequestParam int questionNo){
     return questionRepo.findByQuestionNo(questionNo);
+  }
+
+  @GetMapping("/GetOption")
+  public Option getOption(@RequestParam int optionId){
+    return optionRepo.findByOptionId(optionId);
   }
 }
