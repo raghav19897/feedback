@@ -1,6 +1,8 @@
 package com.delhimunchery.feedback.controller;
 
-import com.delhimunchery.feedback.domain.Responses;
+import com.delhimunchery.feedback.domain.Response;
+import com.delhimunchery.feedback.repositories.OptionRepo;
+import com.delhimunchery.feedback.repositories.QuestionRepo;
 import com.delhimunchery.feedback.repositories.ResponseRepo;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,11 +20,15 @@ public class RestController {
 
   @Autowired
   private ResponseRepo responseRepo;
+  @Autowired
+  private QuestionRepo questionRepo;
+  @Autowired
+  private OptionRepo optionRepo;
 
   @PostMapping("/SendResponse")
   @CrossOrigin
-  private void addResponse(@RequestParam float response) {
-    Responses r = new Responses();
+  private void addResponse(@RequestParam int response) {
+    Response r = new Response();
     r.setResponse(response);
 
     responseRepo.save(r);
@@ -30,27 +36,33 @@ public class RestController {
 
   @GetMapping("/GetAllData")
   @CrossOrigin
-  private List<Responses> getData() {
+  private List<Response> getData() {
     return responseRepo.findAll();
   }
 
   @GetMapping("/GetByResponse")
   @CrossOrigin
-  private List<Responses> getDataByResponse(@RequestParam float response) {
+  private List<Response> sendDataByResponse(@RequestParam int response) {
     return responseRepo.findByResponse(response);
   }
 
   @GetMapping("/GetByDate")
   @CrossOrigin
-  private List<Responses> getDataByDate(@RequestParam String date) throws ParseException {
+  private List<Response> sendDataByDate(@RequestParam String date) throws ParseException {
     Date dateObj = new Date();
-    List<Responses> returnObj = null;
+    List<Response> returnObj = null;
     try {
       dateObj = new SimpleDateFormat("yyyy-MM-dd").parse(date);
-      returnObj = responseRepo.findByDate(dateObj.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+      returnObj = responseRepo
+          .findByDate(dateObj.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
     } catch (ParseException e) {
       throw e;
     }
     return returnObj;
+  }
+
+  @GetMapping("/GetQuestion")
+  public String getQuestion(@RequestParam int questionNo){
+    return questionRepo.findByQuestionNo(questionNo);
   }
 }

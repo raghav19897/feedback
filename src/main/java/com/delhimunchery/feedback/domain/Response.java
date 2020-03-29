@@ -11,12 +11,12 @@ import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "responses")
-public class Responses {
+public class Response {
 
   @Id
   @GeneratedValue
   private int id;
-  private float response;
+  private int response;
   @CreationTimestamp
   @Column(name = "date")
   private LocalDateTime submitDate;
@@ -29,11 +29,11 @@ public class Responses {
     this.id = id;
   }
 
-  public float getResponse() {
+  public int getResponse() {
     return response;
   }
 
-  public void setResponse(float response) {
+  public void setResponse(int response) {
     this.response = response;
   }
 
