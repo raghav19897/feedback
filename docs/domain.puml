@@ -2,7 +2,9 @@
 entity "Question" as question {
   *id: number
   text: string
-
+  ---
+  creationDate: Date
+  lastModified: Date
 }
 
 entity "Option" as option {
@@ -11,13 +13,16 @@ entity "Option" as option {
   value: number
   ---
   question_id:number <<FK>>
+  creationDate: Date
+  lastModified: Date
 }
 
 entity "Response" as response {
   *id: number
-  response: number
-  question_id: number
   submit_date: date
+  ---
+  question_id: number <<FK>>
+  option_id:number <<FK>>
 }
 question }|-- option
 response }|-- question

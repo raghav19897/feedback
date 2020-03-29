@@ -14,7 +14,9 @@ public class Response {
   @Id
   @GeneratedValue
   private long id;
-  private long response;
+  @ManyToOne
+  @JoinColumn(name = "option_id", referencedColumnName = "id")
+  private Option option;
   @ManyToOne
   @JoinColumn(name = "question_id", referencedColumnName = "id")
   private Question question;
@@ -27,14 +29,6 @@ public class Response {
 
   public void setId(long id) {
     this.id = id;
-  }
-
-  public long getResponse() {
-    return response;
-  }
-
-  public void setResponse(long response) {
-    this.response = response;
   }
 
   public Date getSubmitDate() {
