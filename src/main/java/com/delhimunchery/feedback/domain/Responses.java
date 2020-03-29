@@ -1,9 +1,11 @@
 package com.delhimunchery.feedback.domain;
 
 import java.time.LocalDateTime;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -15,8 +17,9 @@ public class Responses {
   @GeneratedValue
   private int id;
   private float response;
-//  @CreationTimestamp
-//  private LocalDateTime submitDate;
+  @CreationTimestamp
+  @Column(name = "date")
+  private LocalDateTime submitDate;
 
   public int getId() {
     return id;
@@ -34,11 +37,11 @@ public class Responses {
     this.response = response;
   }
 
-//  public LocalDateTime getSubmitDate() {
-//    return submitDate;
-//  }
-//
-//  public void setSubmitDate(LocalDateTime submitDate) {
-//    this.submitDate = submitDate;
-//  }
+  public LocalDateTime getSubmitDate() {
+    return submitDate;
+  }
+
+  public void setSubmitDate(LocalDateTime submitDate) {
+    this.submitDate = submitDate;
+  }
 }
