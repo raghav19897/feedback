@@ -10,7 +10,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
-@Table(name = "responses")
 public class Response {
 
   @Id
@@ -18,7 +17,7 @@ public class Response {
   private int id;
   private int response;
   @CreationTimestamp
-  @Column(name = "date")
+  @Column
   private LocalDateTime submitDate;
 
   public int getId() {
