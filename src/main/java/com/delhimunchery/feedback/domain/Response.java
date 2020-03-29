@@ -1,12 +1,11 @@
 package com.delhimunchery.feedback.domain;
 
-import java.time.LocalDateTime;
-import javax.persistence.Column;
+import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
@@ -14,33 +13,35 @@ public class Response {
 
   @Id
   @GeneratedValue
-  private int id;
-  private int response;
+  private long id;
+  private long response;
+  @ManyToOne
+  @JoinColumn(name = "question_id", referencedColumnName = "id")
+  private Question question;
   @CreationTimestamp
-  @Column
-  private LocalDateTime submitDate;
+  private Date submitDate;
 
-  public int getId() {
+  public long getId() {
     return id;
   }
 
-  public void setId(int id) {
+  public void setId(long id) {
     this.id = id;
   }
 
-  public int getResponse() {
+  public long getResponse() {
     return response;
   }
 
-  public void setResponse(int response) {
+  public void setResponse(long response) {
     this.response = response;
   }
 
-  public LocalDateTime getSubmitDate() {
+  public Date getSubmitDate() {
     return submitDate;
   }
 
-  public void setSubmitDate(LocalDateTime submitDate) {
+  public void setSubmitDate(Date submitDate) {
     this.submitDate = submitDate;
   }
 }

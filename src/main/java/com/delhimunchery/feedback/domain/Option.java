@@ -1,37 +1,47 @@
 package com.delhimunchery.feedback.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-@Table(name = "options")
 public class Option {
+
   @Id
   @GeneratedValue
-  @Column(name = "option_id")
-  private int optionId;
-  private int score;
-  private String name;
-  @Column(name = "image_url")
+  private long id;
+  private long score;
+  private String value;
   private String imageURL;
 
-  public int getOptionId() {
-    return optionId;
+  @ManyToOne
+  @JoinColumn(name = "question_id", referencedColumnName = "id")
+  private Question question;
+
+  public long getId() {
+    return id;
   }
 
-  public void setOptionId(int optionId) {
-    this.optionId = optionId;
+  public void setId(long id) {
+    this.id = id;
   }
 
-  public int getScore() {
+  public long getScore() {
     return score;
   }
 
-  public void setScore(int score) {
+  public void setScore(long score) {
     this.score = score;
+  }
+
+  public String getValue() {
+    return value;
+  }
+
+  public void setValue(String value) {
+    this.value = value;
   }
 
   public String getImageURL() {
@@ -42,11 +52,11 @@ public class Option {
     this.imageURL = imageURL;
   }
 
-  public String getName() {
-    return name;
+  public Question getQuestion() {
+    return question;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setQuestion(Question question) {
+    this.question = question;
   }
 }

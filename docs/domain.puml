@@ -13,5 +13,12 @@ entity "Option" as option {
   question_id:number <<FK>>
 }
 
+entity "Response" as response {
+  *id: number
+  response: number
+  question_id: number
+  submit_date: date
+}
 question }|-- option
+response }|-- question
 @enduml
