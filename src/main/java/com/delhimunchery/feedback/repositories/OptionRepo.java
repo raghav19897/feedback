@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface OptionRepo extends JpaRepository<Option, Long> {
   @Query("select option from Option option where option.question.id = ?1")
-  List<Option> findAllByQuestionId(long question_id);
+  List<Option> findAllByQuestionId(long questionId);
 }

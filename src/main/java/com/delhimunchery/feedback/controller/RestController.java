@@ -25,8 +25,8 @@ public class RestController {
   private OptionRepo optionRepo;
 
   @PostMapping("/currentQuestion")
-  public void setCurrentQuestion(@RequestParam long question_id) {
-    CURRENT_QUESTION = question_id;
+  public void setCurrentQuestion(@RequestParam long questionId) {
+    CURRENT_QUESTION = questionId;
   }
 
   @PostMapping("/question")
@@ -37,12 +37,12 @@ public class RestController {
   }
 
   @PostMapping("/option")
-  public void addOption(@RequestParam long rank, @RequestParam String value, @RequestParam String url, @RequestParam long question_id){
+  public void addOption(@RequestParam long rank, @RequestParam String value, @RequestParam String url, @RequestParam long questionId){
     Option option = new Option();
     option.setRank(rank);
     option.setValue(value);
     option.setImageURL(url);
-    option.setQuestion(questionRepo.findById(question_id).orElse(null));
+    option.setQuestion(questionRepo.findById(questionId).orElse(null));
     optionRepo.save(option);
   }
 
