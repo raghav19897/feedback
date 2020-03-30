@@ -36,11 +36,11 @@ public class Option {
   }
 
   public long getScore() {
-    return score;
+    return rank;
   }
 
-  public void setScore(long score) {
-    this.score = score;
+  public void setScore(long rank) {
+    this.rank = rank;
   }
 
   public String getValue() {
