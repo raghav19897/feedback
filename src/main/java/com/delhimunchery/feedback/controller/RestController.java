@@ -1,5 +1,6 @@
 package com.delhimunchery.feedback.controller;
 
+import com.delhimunchery.feedback.OptionBody;
 import com.delhimunchery.feedback.domain.Option;
 import com.delhimunchery.feedback.domain.Question;
 import com.delhimunchery.feedback.repositories.OptionRepo;
@@ -10,6 +11,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @org.springframework.web.bind.annotation.RestController
@@ -37,12 +39,12 @@ public class RestController {
   }
 
   @PostMapping("/option")
-  public void addOption(@RequestParam long rank, @RequestParam String value, @RequestParam String url, @RequestParam long questionId){
+  public void addOption(@RequestBody OptionBody optionBody){
     Option option = new Option();
-    option.setRank(rank);
-    option.setValue(value);
-    option.setImageURL(url);
-    option.setQuestion(questionRepo.findById(questionId).orElse(null));
+    option.setRank(optionBody.getRank());
+    option.setValue(optionBody.getValue());
+    option.setImageURL(optionBody.getUrl());
+    option.setQuestion(questionRepo.findById(optionBody.getQuestioId()).orElse(null));
     optionRepo.save(option);
   }
 
