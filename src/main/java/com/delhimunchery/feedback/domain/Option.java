@@ -35,14 +35,6 @@ public class Option {
     this.id = id;
   }
 
-  public long getScore() {
-    return rank;
-  }
-
-  public void setScore(long rank) {
-    this.rank = rank;
-  }
-
   public String getValue() {
     return value;
   }
@@ -65,5 +57,13 @@ public class Option {
 
   public void setQuestion(Question question) {
     this.question = question;
+  }
+
+  public long getRank() {
+    return rank;
+  }
+
+  public void setRank(long rank) {
+    this.rank = rank;
   }
 }
