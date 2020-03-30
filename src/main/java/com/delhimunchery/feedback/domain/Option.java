@@ -6,8 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 public class Option {
@@ -18,9 +18,9 @@ public class Option {
   private long score;
   private String value;
   private String imageURL;
-  @CreatedDate
+  @CreationTimestamp
   private Date creationDate;
-  @LastModifiedDate
+  @UpdateTimestamp
   private Date lastModified;
 
   @ManyToOne

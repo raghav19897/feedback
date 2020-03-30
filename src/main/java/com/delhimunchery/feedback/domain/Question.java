@@ -4,8 +4,8 @@ import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 public class Question {
@@ -14,9 +14,9 @@ public class Question {
   @GeneratedValue
   private long id;
   private String question;
-  @CreatedDate
+  @CreationTimestamp
   private Date creationDate;
-  @LastModifiedDate
+  @UpdateTimestamp
   private Date lastModified;
 
   public long getId() {
