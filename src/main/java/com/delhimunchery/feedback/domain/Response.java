@@ -39,4 +39,20 @@ public class Response {
   public void setSubmitDate(Date submitDate) {
     this.submitDate = submitDate;
   }
+
+  public Option getOption() {
+    return option;
+  }
+
+  public void setOption(Option option) {
+    this.option = option;
+  }
+
+  public Question getQuestion() {
+    return question;
+  }
+
+  public void setQuestion(Question question) {
+    this.question = question;
+  }
 }
