@@ -15,7 +15,7 @@ public class Option {
   @Id
   @GeneratedValue
   private long id;
-  private long score;
+  private long rank;
   private String value;
   private String imageURL;
   @CreationTimestamp
