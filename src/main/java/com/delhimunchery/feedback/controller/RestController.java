@@ -1,14 +1,20 @@
 package com.delhimunchery.feedback.controller;
 
 import com.delhimunchery.feedback.OptionBody;
+import com.delhimunchery.feedback.QuestionBody;
+import com.delhimunchery.feedback.ResponseBody;
 import com.delhimunchery.feedback.domain.Option;
 import com.delhimunchery.feedback.domain.Question;
 import com.delhimunchery.feedback.domain.Response;
 import com.delhimunchery.feedback.repositories.OptionRepo;
 import com.delhimunchery.feedback.repositories.QuestionRepo;
 import com.delhimunchery.feedback.repositories.ResponseRepo;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,14 +58,10 @@ public class RestController {
   }
 
   @GetMapping("/question")
-  public Question getCurrentQuestion() {
-    Optional<Question> question = questionRepo.findById(CURRENT_QUESTION);
-    return question.orElse(null);
-  }
-
-  @GetMapping("/options")
-  public List<Option> getOptionsForCurrentQuestion() {
-    return optionRepo.findAllByQuestionId(CURRENT_QUESTION);
+  public QuestionBody getCurrentQuestion() {
+    Question question = questionRepo.findById(CURRENT_QUESTION).orElse(null);
+    List<Option> option = optionRepo.findAllByQuestionId(CURRENT_QUESTION);
+    return new QuestionBody(question, option);
   }
 
   @GetMapping("/response")
@@ -72,5 +74,27 @@ public class RestController {
       response.setOption(option.get());
       responseRepo.save(response);
     }
+  }
+
+  @GetMapping("/allQuestions")
+  public List<Question> getAllQuestions(){
+    return questionRepo.findAll();
+  }
+
+  @GetMapping("/allOptions")
+  public List<Option> getAllOptions(){
+    return optionRepo.findAll();
+  }
+
+  @GetMapping("/allResponses")
+  public ArrayList<ResponseBody> getAllResponses(){
+    ArrayList<ResponseBody> allResponses = new ArrayList<>();
+    List<Question> allQuestions = questionRepo.findAll();
+    for(int i=0; i<allQuestions.size(); i++){
+      long questionId = allQuestions.get(i).getId();
+      List<Response> responses = responseRepo.findAllByQuestionId(questionId);
+      allResponses.add(new ResponseBody(questionId, responses));
+    }
+    return allResponses;
   }
 }
