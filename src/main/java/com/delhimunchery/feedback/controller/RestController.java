@@ -1,5 +1,6 @@
 package com.delhimunchery.feedback.controller;
 
+import com.delhimunchery.feedback.AdminBody;
 import com.delhimunchery.feedback.OptionBody;
 import com.delhimunchery.feedback.QuestionBody;
 import com.delhimunchery.feedback.ResponseBody;
@@ -76,25 +77,27 @@ public class RestController {
     }
   }
 
-  @GetMapping("/allQuestions")
-  public List<Question> getAllQuestions(){
+  private List<Question> getAllQuestions(){
     return questionRepo.findAll();
   }
 
-  @GetMapping("/allOptions")
-  public List<Option> getAllOptions(){
+  private List<Option> getAllOptions(){
     return optionRepo.findAll();
   }
 
+  private List<Response> getAllResponsesForQuestion(long questionId){
+    return responseRepo.findAllByQuestionId(questionId);
+  }
+
   @GetMapping("/allResponses")
-  public ArrayList<ResponseBody> getAllResponses(){
+  public AdminBody getAllResponses(){
     ArrayList<ResponseBody> allResponses = new ArrayList<>();
-    List<Question> allQuestions = questionRepo.findAll();
-    for(int i=0; i<allQuestions.size(); i++){
-      long questionId = allQuestions.get(i).getId();
-      List<Response> responses = responseRepo.findAllByQuestionId(questionId);
-      allResponses.add(new ResponseBody(questionId, responses));
+    List<Question> allQuestions = getAllQuestions();
+    for (Question allQuestion : allQuestions) {
+      long questionId = allQuestion.getId();
+      allResponses.add(new ResponseBody(questionId, getAllResponsesForQuestion(questionId)));
     }
-    return allResponses;
+    List<Option> allOptions = getAllOptions();
+    return new AdminBody(allQuestions, allOptions, allResponses);
   }
 }
