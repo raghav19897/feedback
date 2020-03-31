@@ -47,11 +47,11 @@ public class RestController {
     option.setRank(optionBody.getRank());
     option.setValue(optionBody.getValue());
     option.setImageURL(optionBody.getUrl());
-    option.setQuestion(questionRepo.findById(optionBody.getQuestioId()).orElse(null));
+    option.setQuestion(questionRepo.findById(optionBody.getQuestionId()).orElse(null));
     optionRepo.save(option);
   }
 
-  @GetMapping("/currentQuestion")
+  @GetMapping("/question")
   public Question getCurrentQuestion() {
     Optional<Question> question = questionRepo.findById(CURRENT_QUESTION);
     return question.orElse(null);
@@ -62,7 +62,7 @@ public class RestController {
     return optionRepo.findAllByQuestionId(CURRENT_QUESTION);
   }
 
-  @GetMapping("response")
+  @GetMapping("/response")
   public void addResponse(@RequestParam long optionId) {
     Response response = new Response();
     Optional<Question> question = questionRepo.findById(CURRENT_QUESTION);

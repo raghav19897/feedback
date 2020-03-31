@@ -4,7 +4,7 @@ public class OptionBody {
   private long rank;
   private String value;
   private String url;
-  private long questioId;
+  private long questionId;
 
   public long getRank() {
     return rank;
@@ -30,11 +30,11 @@ public class OptionBody {
     this.url = url;
   }
 
-  public long getQuestioId() {
-    return questioId;
+  public long getQuestionId() {
+    return questionId;
   }
 
-  public void setQuestioId(long questioId) {
-    this.questioId = questioId;
+  public void setQuestionId(long questionId) {
+    this.questionId = questionId;
   }
 }
